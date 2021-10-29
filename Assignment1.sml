@@ -55,7 +55,7 @@ fun what_month(dayofYear: int) =
     let
     val day_list = [31,29,31,30,31,30,31,30,31,30,31,30]
     in
-    number_before_reaching_sum(dayofYear,day_list)
+    number_before_reaching_sum(dayofYear,day_list) + 1
     end;
     
 val test1 = is_older ((1,2,3),(1,2,4)) = true;
@@ -66,5 +66,5 @@ val test4 = dates_in_month ([(2012,2,28),(2013,12,1),(2016,2,28)],2) = [(2012,2,
 val test5 = dates_in_months ([(2012,2,28),(2013,12,1),(2011,3,31),(2011,4,28),(2011,5,28)],[2,3,4,5]) = [(2012,2,28),(2011,3,31),(2011,4,28),(2011,5,28)]
 val test6 = get_nth (["hi", "there", "how", "are", "you"], 1) = "hi";
 val test7 = date_to_string (2013, 6, 1) = "June 1, 2013";
-val test8 = number_before_reaching_sum (11, [1,2,3,4,5]) = 4;
+val test8 = number_before_reaching_sum (60, [31,29,30])=1;
 val test9 = what_month 70 = 3
