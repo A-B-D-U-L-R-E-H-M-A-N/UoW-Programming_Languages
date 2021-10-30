@@ -58,6 +58,27 @@ fun what_month(dayofYear: int) =
     number_before_reaching_sum(dayofYear,day_list) + 1
     end;
     
+fun month_range(day1 : int, day2: int) =
+    if day1 > day2
+    then []
+    else what_month(day1) :: month_range(day1 + 1, day2)
+    
+fun oldest(date_list : (int*int*int) list) = 
+    if null date_list
+    then NONE
+    else let fun oldest_in_list(myList: (int*int*int) list) = 
+    if null (tl myList)
+    then hd myList
+    else let val older = oldest_in_list(tl myList)
+    in
+    if is_older(hd myList, older)
+    then hd myList
+    else older
+    end
+    in
+        SOME(oldest_in_list(date_list))
+    end
+    
 val test1 = is_older ((1,2,3),(1,2,4)) = true;
 val test2 = number_in_month ([(2012,2,28),(2013,12,1),(2011,2,13)],2) = 2
 val test3 = number_in_months ([(2012,3,28),(2013,12,1),(2011,3,31),(2011,4,28),(2013,4,4)],[2,3,4]) = 4;
@@ -68,3 +89,7 @@ val test6 = get_nth (["hi", "there", "how", "are", "you"], 1) = "hi";
 val test7 = date_to_string (2013, 6, 1) = "June 1, 2013";
 val test8 = number_before_reaching_sum (60, [31,29,30])=1;
 val test9 = what_month 70 = 3
+
+val test10 = month_range (31, 35)= [1,2,2,2,2]
+
+val test11 = oldest([(2012,2,28),(2011,3,31),(2011,4,28),(2009,3,21)]) = SOME (2009,3,21)
